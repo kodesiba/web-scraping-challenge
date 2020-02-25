@@ -33,7 +33,10 @@ def scrape():
     marstwitter = requests.get("https://twitter.com/marswxreport?lang=en")
     # get page text
     marstwittertext = bs(marstwitter.text,'html.parser')
-    twitterweather = marstwittertext.find(class_="tweet-text").text.strip()
+    twitterweather_ = marstwittertext.find(class_="tweet-text").text.strip()
+    picindex = twitterweather_.find('pic.twitter')
+    twitterweather = twitterweather_[0:picindex].replace('\n',' ')
+    twitterweather
 
     # get mars facts
     # read facts page into dataframe
