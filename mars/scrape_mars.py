@@ -91,5 +91,4 @@ def scrape():
         "facts":facts.to_dict('records') ,
         "hemimageurls":hemisphereURLs
     }
-    print(fulldict)
     return fulldict
