@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Mars Data</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='styles/reset.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div class="jumbotron text-center">
+            <h1>Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+            </div>
+
+            <!-- Craigslist Listings -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Latest Mars News</h3>
+                    <h4>{{listings.newsarticletitle}}</h4>
+                    <p>{{listings.newsarticlepara}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Featured Mars Image</h3>
+                    <img class="boximg" src="{{listings.featuredimage}}" alt="featured image">
+                </div>
+                <div class="col-md-4">
+                    <h4>Current Weather on Mars</h4>
+                    <p>{{listings.twitterweather}}</p>
+                    <br>
+                    <h4>Mars Facts</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">Description</th>
+                            <th scope="col">Value</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in listings.facts %}
+                            <tr>
+                                <td>{{record.description}}</td>
+                                <td>{{record.value}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container topspace">
+            <div class="row">
+                    <h3 class="centered"><strong>Mars Hemispheres</strong></h3>
+                    <hr>
+                    {% for image in listings.hemimageurls %}
+                        <div class="col-md-6">
+                            <img class="subboximg" src="{{image.img_url}}" alt="{{image.title}}">
+                            <h4><strong>{{image.title}}</strong></h4>
+                        </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </body>
+
+</html>
